@@ -1,5 +1,6 @@
 import React from 'react'
-import {Form, Input, Row, Button} from 'antd'
+import {Form, Input, Button} from 'antd'
+import {connect} from 'dva'
 
 class Product extends React.Component {
 
@@ -8,46 +9,56 @@ class Product extends React.Component {
     this.state = {}
   }
 
+  initForm = () => {
+    this.setState({
+      name: Date.now(),
+      code: Date.now(),
+      price: Math.floor(Math.random() * 100)
+    })
+  };
+
   login = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((error, value) => {
       if (!error) {
-        console.info(value);
-        this.props.history.push('/product/list');
+        this.props.dispatch({
+          type: 'productList/addProduct',
+          payload: value
+        });
+        this.initForm()
       }
     })
   };
 
+  componentDidMount() {
+    this.initForm();
+  }
+
   render() {
-    let fieldDecorator = this.props.form.getFieldDecorator;
-    const formItemLayout = {
-      labelCol: {
-        xs: {span: 24},
-        sm: {span: 4},
-      },
-      wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 16},
-      },
-    };
-    return <div>
-      <Form onSubmit={this.login}>
-        <Form.Item  {...formItemLayout} label='产品名称'>
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <Form layout="inline" onSubmit={this.login}>
+        <Form.Item label='产品名称'>
           {
-            fieldDecorator('name')(<Input/>)
+            getFieldDecorator('name', {initialValue: this.state.name})(<Input placeholder="产品名称"/>)
           }
         </Form.Item>
-        <Form.Item  {...formItemLayout} label='产品编码'>
+        <Form.Item label='产品编码'>
           {
-            fieldDecorator('code')(<Input/>)
+            getFieldDecorator('code', {initialValue: this.state.code})(<Input placeholder="产品编码"/>)
           }
         </Form.Item>
-        <Row justify='center' type='flex'>
-          <Button type='primary' htmlType='submit'>保存</Button>
-        </Row>
+        <Form.Item label='价格'>
+          {
+            getFieldDecorator('price', {initialValue: this.state.price})(<Input placeholder="价格"/>)
+          }
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">添加</Button>
+        </Form.Item>
       </Form>
-    </div>
+    );
   }
 }
 
-export default Form.create()(Product)
+export default connect(state => state)(Form.create()(Product))
