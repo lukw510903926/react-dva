@@ -5,9 +5,6 @@ import './index.css';
 import {LocaleProvider} from 'antd';
 import {Router} from 'dva/router';
 import createRoutes from '@/routes/index';
-import ProductList from './models/ProductList'
-import Login from './models/Login'
-
 import logger from 'redux-logger'
 
 const app = dva({
@@ -17,16 +14,13 @@ const app = dva({
   },
 });
 
-// 2. Plugins
-// app.use({});
+// 2. Plugins app.use({});
 
-// 3. Model
-// app.model(require('./models/example').default);
-app.model(ProductList);
-app.model(Login);
-// 4. Router
-// app.router(ReactRouter);
-// -> 初始化路由
+// 3. Model app.model(require('./models/example').default); app.model(ProductList);
+require('./models').default.forEach(key => {
+  app.model(key.default);
+});
+// 4. Router  -> 初始化路由 app.router(ReactRouter);
 app.router(({history, app}) => (
   <LocaleProvider>
     <Router history={history}>
@@ -34,5 +28,4 @@ app.router(({history, app}) => (
     </Router>
   </LocaleProvider>
 ));
-
 app.start('#root');

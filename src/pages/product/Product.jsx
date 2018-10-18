@@ -38,19 +38,19 @@ class Product extends React.Component {
     const {getFieldDecorator} = this.props.form;
     return (
       <Form layout="inline" onSubmit={this.login}>
-        <Form.Item label='产品名称'>
+        <Form.Item>
           {
-            getFieldDecorator('name', {initialValue: this.state.name})(<Input placeholder="产品名称"/>)
+            getFieldDecorator('name', {initialValue: this.state.name})(<Input addonBefore="产品名称:" placeholder='产品名称' />)
           }
         </Form.Item>
-        <Form.Item label='产品编码'>
+        <Form.Item>
           {
-            getFieldDecorator('code', {initialValue: this.state.code})(<Input placeholder="产品编码"/>)
+            getFieldDecorator('code', {initialValue: this.state.code})(<Input addonBefore="产品编码:" placeholder="产品编码"/>)
           }
         </Form.Item>
-        <Form.Item label='价格'>
+        <Form.Item>
           {
-            getFieldDecorator('price', {initialValue: this.state.price})(<Input placeholder="价格"/>)
+            getFieldDecorator('price', {initialValue: this.state.price})(<Input addonBefore='价格:' placeholder="价格"/>)
           }
         </Form.Item>
         <Form.Item>
@@ -60,5 +60,4 @@ class Product extends React.Component {
     );
   }
 }
-
 export default connect(state => state)(Form.create()(Product))
