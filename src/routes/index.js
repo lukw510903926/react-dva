@@ -1,4 +1,3 @@
-import React from 'react';
 import BaseLayout from '../pages/BaseLayout';
 import {createRoutes} from '@/utils/RouteUtil';
 import Product from './Product'

@@ -1,6 +1,5 @@
-import React from 'react';
 import NotFound from '@/pages/404'
-import {createRoute, createRoutes} from '@/utils/RouteUtil';
+import {createRoute} from '@/utils/RouteUtil';
 
 const routesConfig = (app) => ({
     key: 'notFound',

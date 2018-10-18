@@ -1,7 +1,6 @@
-import React from 'react';
 import Product from '@/pages/product/Product'
 import ProductList from '@/pages/product/ProductList'
-import {createRoute, createRoutes} from '@/utils/RouteUtil';
+import {createRoutes} from '@/utils/RouteUtil';
 
 const routesConfig = (app) => ([{
     path: '/home/product/list',

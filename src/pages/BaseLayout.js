@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect,} from 'dva';
 import {Layout} from "antd";
-import {Redirect} from 'dva/router'
 import LeftMenu from "@/pages/index/LeftMenu";
 import {Row, Col} from "antd";
 
@@ -17,6 +16,10 @@ class BaseLayout extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch({
+      type: 'login/login',
+      payload: {}
+    });
     this.updateSize();
     window.addEventListener("resize", () => this.updateSize());
   }
@@ -27,6 +30,7 @@ class BaseLayout extends React.Component {
   }
 
   updateSize() {
+    console.log('state : ', this.state);
     try {
       let minHeight = document.body.clientHeight - 64;
       let width = document.body.clientWidth;
@@ -48,7 +52,7 @@ class BaseLayout extends React.Component {
         <Layout.Header>
           <Row style={{fontSize: 18, color: 'white'}}>
             <Col span={20}> 后台管理系统 </Col>
-            <Col style={info} span={4}> 超级管理员 </Col>
+            <Col style={info} span={4}> {this.props.login.loginUser.name}</Col>
           </Row>
         </Layout.Header>
         <Layout>
@@ -66,4 +70,4 @@ class BaseLayout extends React.Component {
   }
 }
 
-export default connect()(BaseLayout);
+export default connect(state => state)(BaseLayout);

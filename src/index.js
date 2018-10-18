@@ -6,6 +6,8 @@ import {LocaleProvider} from 'antd';
 import {Router} from 'dva/router';
 import createRoutes from '@/routes/index';
 import ProductList from './models/ProductList'
+import Login from './models/Login'
+
 import logger from 'redux-logger'
 
 const app = dva({
@@ -21,6 +23,7 @@ const app = dva({
 // 3. Model
 // app.model(require('./models/example').default);
 app.model(ProductList);
+app.model(Login);
 // 4. Router
 // app.router(ReactRouter);
 // -> 初始化路由
