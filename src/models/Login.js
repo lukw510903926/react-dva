@@ -16,4 +16,11 @@ export default {
       return {...state, loginUser: action.payload};
     },
   },
+  subscriptions: {
+    setup({dispatch,history}) {
+      history.listen(location => {
+        console.log(location)
+      })
+    },
+  },
 }
