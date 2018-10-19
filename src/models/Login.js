@@ -1,12 +1,14 @@
+// import {routerRedux} from 'dva/router'
+
 export default {
 
   namespace: 'login',
   state: {
-    loginUser:{}
+    loginUser: {},
+    backPath: ''
   },
   effects: {
     * login({payload: value}, {call, put}) {
-      console.log('--------------');
       yield put({type: 'loginSystem', payload: {name: '管理员-dva'}})
     },
   },
@@ -17,9 +19,10 @@ export default {
     },
   },
   subscriptions: {
-    setup({dispatch,history}) {
+    setup({dispatch, history}) {
       history.listen(location => {
-        console.log(location)
+        console.log('location',location,'pathname : ',location.pathname);
+        //routerRedux.push("/home/login",{backPath:location.pathname});
       })
     },
   },

@@ -6,7 +6,6 @@ export default {
   },
   effects: {//redux 中的action
     * addProduct({payload: value}, {call, put}) {
-      console.log('value :', value);
       yield put({type: 'add', payload: value})
     },
     * init({payload}, {call, put}) {
@@ -16,19 +15,16 @@ export default {
   reducers: {
 
     initState(state, action) {
-      console.log('action: ', action);
       state.list.push(action.payload);
       return {...state};
     },
     add(state, action) {
-      console.log('action: ', action);
       state.list.push(action.payload);
       return {...state}
     }
   },
   subscriptions: {
     setup({dispatch,history}) {
-      console.log('history :',history);
       dispatch({type: 'init', payload: {name: Date.now(), code: Date.now()}});//启动时执行
     },
   },
