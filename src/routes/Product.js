@@ -1,7 +1,7 @@
 import Product from '@/pages/product/Product'
 import ProductList from '@/pages/product/ProductList'
 import {createRoutes} from '@/utils/RouteUtil';
-
+import {NotExist} from "@/routes/NotFound";
 const routesConfig = (app) => ([{
     path: '/home/product/list',
     title: '产品列表',
@@ -13,4 +13,4 @@ const routesConfig = (app) => ([{
   }]
 );
 
-export default app => createRoutes(app, routesConfig);
+export default app => createRoutes(app,NotExist, routesConfig);

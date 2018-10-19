@@ -5,10 +5,12 @@ import './index.css';
 import {LocaleProvider} from 'antd';
 import {Router} from 'dva/router';
 import createRoutes from '@/routes/index';
+import {NotExist} from "@/routes/NotFound";
 import logger from 'redux-logger'
 
 const app = dva({
-  onAction: logger,// onAction支持数组，可同时传入多个中间件
+  // onAction支持数组，可同时传入多个中间件
+  // onAction: logger,
   onError(err, dispatch) {
     console.error('err', err, 'dispatch:', dispatch);
   },
@@ -24,7 +26,7 @@ require('./models').default.forEach(key => {
 app.router(({history, app}) => (
   <LocaleProvider>
     <Router history={history}>
-      {createRoutes(app)}
+      {createRoutes(app,NotExist)}
     </Router>
   </LocaleProvider>
 ));

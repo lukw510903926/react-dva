@@ -1,7 +1,7 @@
 import BaseLayout from '../pages/BaseLayout';
 import {createRoutes} from '@/utils/RouteUtil';
 import Product from './Product'
-import NotFound from './NotFound'
+import {NotExist} from "@/routes/NotFound";
 
 const routesConfig = (app) => ([
   {
@@ -10,9 +10,8 @@ const routesConfig = (app) => ([
     indexRoute: '/home/product/list',
     component: BaseLayout,
     childRoutes: [
-      Product(app),
-      NotFound(app)
+      Product(app)
     ]
   }
 ]);
-export default app => createRoutes(app, routesConfig,{});
+export default app => createRoutes(app, NotExist, routesConfig);
