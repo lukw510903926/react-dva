@@ -1,4 +1,4 @@
-import NotFound from '@/pages/404'
+import NotFound from '@/pages/exception/404'
 
 export const NotExist = {
   path: '/home/404',

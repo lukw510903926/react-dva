@@ -1,5 +1,5 @@
 import BaseLayout from '../pages/BaseLayout';
-import {createRoutes,createNotFound} from '@/utils/RouteUtil';
+import {createRoutes} from '@/utils/RouteUtil';
 import Product from './Product'
 import {NotExist} from "@/routes/NotFound";
 
