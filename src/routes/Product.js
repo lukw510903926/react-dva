@@ -13,4 +13,4 @@ const routesConfig = (app) => ([{
   }]
 );
 
-export default app => createRoutes(app,NotExist, routesConfig);
+export default app => createRoutes(app,routesConfig,{notFound:NotExist});

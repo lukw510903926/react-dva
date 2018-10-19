@@ -1,23 +1,22 @@
 import dva from 'dva';
 import React from 'react';
 import "antd/dist/antd.css";
-import './index.css';
+import './assets/css/index.css';
 import {LocaleProvider} from 'antd';
 import {Router} from 'dva/router';
-import createRoutes from '@/routes/index';
-import {NotExist} from "@/routes/NotFound";
+import createRoutes from './routes/index';
+import {NotExist} from "./routes/NotFound";
 import logger from 'redux-logger'
 
 const app = dva({
   // onAction支持数组，可同时传入多个中间件
-  // onAction: logger,
+  onAction: logger,
   onError(err, dispatch) {
     console.error('err', err, 'dispatch:', dispatch);
   },
 });
 
 // 2. Plugins app.use({});
-
 // 3. Model app.model(require('./models/example').default); app.model(ProductList);
 require('./models').default.forEach(key => {
   app.model(key.default);
@@ -26,7 +25,7 @@ require('./models').default.forEach(key => {
 app.router(({history, app}) => (
   <LocaleProvider>
     <Router history={history}>
-      {createRoutes(app,NotExist)}
+      {createRoutes(app, {notFound: NotExist})}
     </Router>
   </LocaleProvider>
 ));
