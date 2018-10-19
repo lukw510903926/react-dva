@@ -1,10 +1,9 @@
-import HttpRequest from './utils/HttpRequest';
+import HttpRequest from '@/utils/HttpRequest';
 
 export default class ProductHttp {
 
   static productList() {
-    return HttpRequest.getRequest('/product/list')
-      .then(data => data)
-      .catch(error => console.log(error));
+
+    return HttpRequest.getRequest('/user/list');
   }
 }
