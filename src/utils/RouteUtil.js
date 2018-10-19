@@ -25,14 +25,13 @@ export const createRoutes = (app, routesConfig, props) => {
  */
 export const createRoute = (app, routesConfig) => {
   const {
-    notExist,
     component: Page,
     path,
     indexRoute,
     title,
     ...otherProps
   } = routesConfig(app);
-  let routeProps = cloneProps({path, title, Page, notExist, otherProps});
+  let routeProps = cloneProps({path, title, Page, otherProps});
   if (indexRoute) {
     return [
       <Redirect key={Math.random()} exact from={path} to={indexRoute}/>,
