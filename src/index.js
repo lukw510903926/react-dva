@@ -28,5 +28,6 @@ app.router(({history, app}) => (
       {createRoutes(app, {notFound: NotExist})}
     </Router>
   </LocaleProvider>
+  
 ));
 app.start('#root');
