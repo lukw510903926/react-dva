@@ -9,13 +9,13 @@
  * @type {*[]}
  */
 const Menu = [
-  {key: Math.random(), path: "/home/404", title: "页面未找到", auth: true, isMenu: false},
-  {key: Math.random(), path: "/login", title: "登录页", auth: false, isMenu: false},
+  {key: "/home/404", path: "/home/404", title: "页面未找到", auth: true, isMenu: false},
+  {key: "/login", path: "/login", title: "登录页", auth: false, isMenu: false},
   {
-    key: Math.random(), title: "产品管理", type: "star", isMenu: true,
+    key: "product", title: "产品管理", type: "star", isMenu: true,
     children: [
-      {key: Math.random(), path: "/home/product/list", title: "产品列表", auth: false, isMenu: true},
-      {key: Math.random(), path: "/home/product/add", title: "产品添加", auth: false, isMenu: true},
+      {key: "/home/product/list", path: "/home/product/list", title: "产品列表", auth: false, isMenu: true},
+      {key: "/home/product/add", path: "/home/product/add", title: "产品添加", auth: false, isMenu: true},
     ]
   }
 ];

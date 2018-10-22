@@ -31,7 +31,7 @@ class BaseLayout extends React.Component {
 
   updateSize() {
     try {
-      let minHeight = document.body.clientHeight - 64;
+      let minHeight = 'calc(100vh - 64px)';
       let width = document.body.clientWidth;
       this.setState({
         width,
