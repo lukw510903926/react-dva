@@ -8,7 +8,7 @@ import DocumentTitle from 'react-document-title';
  * @param {*} routesConfig
  * @param exception
  */
-export const createRoutes = (app, routesConfig, exception = [],option = {}) => {
+export const createRoutes = (app, routesConfig, exception = [], option = {}) => {
 
   return (
     <Switch key={Math.random()}>
@@ -25,23 +25,17 @@ export const createRoutes = (app, routesConfig, exception = [],option = {}) => {
  * @param {*} routesConfig
  */
 export const createRoute = (app, routesConfig) => {
-  const {
-    component: Page,
-    path,
-    indexRoute,
-    title,
-    ...otherProps
-  } = routesConfig(app);
-  let routeProps = cloneProps({path, title, Page, otherProps});
+
   let list = [];
+  const {component: Page, path, indexRoute, title, ...otherProps} = routesConfig(app);
+  let routeProps = cloneProps({path, title, Page, otherProps});
   if (indexRoute) {
     list.push(<Redirect key={Math.random()} exact from={path} to={indexRoute}/>);
   }
 
-  if (routeProps.auth) {
+  if (otherProps.auth) {
     list.push(<Route path={path} component={props => <Redirect {...props} to={{
-      pathname: "/home/403",
-      state: {from: props.location}
+      pathname: "/home/403", state: {from: props.location}
     }}/>}/>)
   } else {
     list.push(<Route {...routeProps} />);
