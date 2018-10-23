@@ -6,7 +6,7 @@ import {LocaleProvider} from 'antd';
 import {Router} from 'dva/router';
 import createRoutes from './routes/index';
 import {exception} from "@/routes/Exception";
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 
 const app = dva({
   // onAction支持数组，可同时传入多个中间件
