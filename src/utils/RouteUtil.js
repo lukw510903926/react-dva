@@ -11,7 +11,7 @@ export const createRoutes = (routesConfig, option = {}) => {
 
   return (
     <Switch key={Math.random()}>
-      {routesConfig(option).map(config => createRoute(option, () => config))}
+      {routesConfig(option).map(config => createRoute(() => config), option)}
       {createException(option.exception)}
     </Switch>
   );
