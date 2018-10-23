@@ -4,9 +4,8 @@ import DocumentTitle from 'react-document-title';
 
 /**
  * 生成一组路由
- * @param {*} app
  * @param {*} routesConfig
- * @param exception
+ * @param {*} option {exception:{},loginPath:'',loginUser:{}}
  */
 export const createRoutes = (routesConfig, option = {}) => {
 
@@ -21,10 +20,10 @@ export const createRoutes = (routesConfig, option = {}) => {
 
 /**
  * 生成单个路由
- * @param {*} app
  * @param {*} routesConfig
+ * @param {*} option
  */
-export const createRoute = (option, routesConfig) => {
+export const createRoute = (routesConfig, option) => {
 
   let list = [];
   const {component: Page, path, indexRoute, title, ...otherProps} = routesConfig(option);
@@ -43,6 +42,11 @@ export const createRoute = (option, routesConfig) => {
   return list;
 };
 
+/**
+ * 异常组件
+ * @param exception
+ * @returns {*}
+ */
 export const createException = (exception) => {
 
   let notExistPath;
