@@ -6,13 +6,14 @@ import DocumentTitle from 'react-document-title';
  * 生成一组路由
  * @param {*} app
  * @param {*} routesConfig
+ * @param exception
  */
-export const createRoutes = (app, routesConfig, props) => {
+export const createRoutes = (app, routesConfig, exception = [],option = {}) => {
 
   return (
     <Switch key={Math.random()}>
       {routesConfig(app).map(config => createRoute(app, () => config))}
-      {createNotFound(props.notFound)}
+      {createException(exception)}
     </Switch>
   );
 
@@ -32,23 +33,36 @@ export const createRoute = (app, routesConfig) => {
     ...otherProps
   } = routesConfig(app);
   let routeProps = cloneProps({path, title, Page, otherProps});
+  let list = [];
   if (indexRoute) {
-    return [
-      <Redirect key={Math.random()} exact from={path} to={indexRoute}/>,
-      <Route {...routeProps} />
-    ];
+    list.push(<Redirect key={Math.random()} exact from={path} to={indexRoute}/>);
   }
-  return <Route {...routeProps} />;
+
+  if (routeProps.auth) {
+    list.push(<Route path={path} component={props => <Redirect {...props} to={{
+      pathname: "/home/403",
+      state: {from: props.location}
+    }}/>}/>)
+  } else {
+    list.push(<Route {...routeProps} />);
+  }
+  return list;
 };
 
-export const createNotFound = (props) => {
+export const createException = (exception) => {
 
-  return (
-    <Switch>
-      <Route exact key={Math.random()} path={props.path} component={props.component}/>
-      <Redirect key={Math.random()} from='*' to={props.path}/>
-    </Switch>
-  );
+  let notExistPath;
+  let list = exception.map(props => {
+    if (props.type === 404) {
+      notExistPath = props.path;
+    }
+    return <Route exact key={Math.random()} path={props.path} component={props.component}/>;
+  });
+  //放在路由列表的最后面
+  if (notExistPath) {
+    list.push(<Redirect key={Math.random()} from='*' to={notExistPath}/>);
+  }
+  return list;
 };
 
 export const cloneProps = (config) => {
@@ -60,6 +74,8 @@ export const cloneProps = (config) => {
     {
       key: Math.random(),
       path,
+      title,
+      ...otherProps,
       render: props => (
         <DocumentTitle title={title}>
           <config.Page key={path} routerData={otherProps} {...props} />

@@ -1,7 +1,7 @@
 import BaseLayout from '../pages/BaseLayout';
 import {createRoutes} from '@/utils/RouteUtil';
 import Product from './Product'
-import {NotExist} from "@/routes/NotFound";
+import {exception} from "@/routes/Exception";
 
 const routesConfig = (app) => ([
   {
@@ -14,4 +14,4 @@ const routesConfig = (app) => ([
     ]
   }
 ]);
-export default app => createRoutes(app, routesConfig,{notFound:NotExist});
+export default app => createRoutes(app, routesConfig, exception);

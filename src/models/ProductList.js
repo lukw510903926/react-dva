@@ -27,7 +27,7 @@ export default {
   },
   subscriptions: {
     setup({dispatch,history}) {
-      ProductHttp.productList().then(data =>console.log(data));
+     // ProductHttp.productList().then(data =>console.log(data));
       dispatch({type: 'init', payload: {name: Date.now(), code: Date.now()}});//启动时执行
     },
   },
