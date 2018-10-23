@@ -1,9 +1,8 @@
 import Product from '@/pages/product/Product'
 import ProductList from '@/pages/product/ProductList'
 import {createRoutes} from '@/utils/RouteUtil';
-import {exception} from "@/routes/Exception";
 
-const routesConfig = (app) => ([{
+const routesConfig = (option) => ([{
     path: '/home/product/list',
     title: '产品列表',
     component: ProductList
@@ -15,4 +14,4 @@ const routesConfig = (app) => ([{
   }]
 );
 
-export default app => createRoutes(app, routesConfig, {exception});
+export default option => createRoutes(routesConfig, option);

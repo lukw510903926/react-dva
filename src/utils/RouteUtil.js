@@ -8,11 +8,11 @@ import DocumentTitle from 'react-document-title';
  * @param {*} routesConfig
  * @param exception
  */
-export const createRoutes = (app, routesConfig, option = {}) => {
+export const createRoutes = (routesConfig, option = {}) => {
 
   return (
     <Switch key={Math.random()}>
-      {routesConfig(app).map(config => createRoute(app, () => config))}
+      {routesConfig(option).map(config => createRoute(option, () => config))}
       {createException(option.exception)}
     </Switch>
   );
@@ -24,10 +24,10 @@ export const createRoutes = (app, routesConfig, option = {}) => {
  * @param {*} app
  * @param {*} routesConfig
  */
-export const createRoute = (app, routesConfig) => {
+export const createRoute = (option, routesConfig) => {
 
   let list = [];
-  const {component: Page, path, indexRoute, title, ...otherProps} = routesConfig(app);
+  const {component: Page, path, indexRoute, title, ...otherProps} = routesConfig(option);
   let routeProps = cloneProps({path, title, Page, otherProps});
   if (indexRoute) {
     list.push(<Redirect key={Math.random()} exact from={path} to={indexRoute}/>);
