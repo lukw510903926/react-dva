@@ -8,12 +8,12 @@ import DocumentTitle from 'react-document-title';
  * @param {*} routesConfig
  * @param exception
  */
-export const createRoutes = (app, routesConfig, exception = [], option = {}) => {
+export const createRoutes = (app, routesConfig, option = {}) => {
 
   return (
     <Switch key={Math.random()}>
       {routesConfig(app).map(config => createRoute(app, () => config))}
-      {createException(exception)}
+      {createException(option.exception)}
     </Switch>
   );
 

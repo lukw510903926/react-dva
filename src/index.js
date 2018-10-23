@@ -25,7 +25,7 @@ require('./models').default.forEach(key => {
 app.router(({history, app}) => (
   <LocaleProvider>
     <Router history={history}>
-      {createRoutes(app, exception)}
+      {createRoutes(app, {exception})}
     </Router>
   </LocaleProvider>
   
