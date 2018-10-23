@@ -10,7 +10,7 @@ import logger from 'redux-logger'
 
 const app = dva({
   // onAction支持数组，可同时传入多个中间件
-  onAction: logger,
+  // onAction: logger,
   onError(err, dispatch) {
     console.error('err', err, 'dispatch:', dispatch);
   },
@@ -25,7 +25,7 @@ require('./models').default.forEach(key => {
 app.router(({history, app}) => (
   <LocaleProvider>
     <Router history={history}>
-      {createRoutes({exception})}
+      {createRoutes({exception,authorizedDenied:'/home/403'})}
     </Router>
   </LocaleProvider>
   
