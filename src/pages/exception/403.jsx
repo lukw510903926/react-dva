@@ -1,6 +1,5 @@
 import React from 'react';
 import {Row, Col} from 'antd'
-import image from '@/assets/image/404.png'
 
 export default class NotFound extends React.Component {
 
