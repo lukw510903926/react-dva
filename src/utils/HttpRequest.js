@@ -14,7 +14,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    console.info("response interceptors-------------");
     return response;
   }, (error) => {
     return Promise.reject(error);
@@ -72,4 +71,42 @@ export default class HttpRequest {
     });
   }
 
+  static postForm(params, url) {
+    return axios({
+      url: url,
+      method: 'post',
+      data: {
+        ...params,
+      },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: [data => {
+        let formData = new FormData();
+        for (let key in params) {
+          formData.append(key, params[key]);
+        }
+        return formData;
+      }],
+    });
+  }
+
+  static postFormV2(params, url) {
+    let config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+    let formData = new FormData();
+    for (let key in params) {
+      formData.append(key, params[key]);
+    }
+    return new Promise((resolve, reject) => {
+      axios.post(url, formData, config).then(
+        response => resolve(response.data)
+      ).catch(
+        error => reject(error));
+    })
+
+  }
 }
