@@ -103,11 +103,8 @@ export default class HttpRequest {
     }
 
     return axios.post(url, formData, config)
-      .then(
-        response => response.data
-      ).catch(
-        error => Promise.reject(error)
-      )
+      .then(response => response.data)
+      .catch(error => Promise.reject(error))
     // return new Promise((resolve, reject) => {
     //   axios.post(url, formData, config).then(
     //     response => resolve(response.data)
