@@ -101,12 +101,18 @@ export default class HttpRequest {
     for (let key in params) {
       formData.append(key, params[key]);
     }
-    return new Promise((resolve, reject) => {
-      axios.post(url, formData, config).then(
-        response => resolve(response.data)
+
+    return axios.post(url, formData, config)
+      .then(
+        response => response.data
       ).catch(
-        error => reject(error));
-    })
+        error => Promise.reject(error)
+      )
+    // return new Promise((resolve, reject) => {
+    //   axios.post(url, formData, config).then(
+    //     response => resolve(response.data)
+    //   ).catch(error => reject(error));
+    // })
 
   }
 }
